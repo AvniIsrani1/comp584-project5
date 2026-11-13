@@ -1,0 +1,334 @@
+/* main colors */
+:root {
+  --background: #f6f4ef;
+  --text: #33312d;
+  --light-text: #8a857c;
+  --border: #e3ded4;
+  --hover: #efebe3;
+  --selected: #e7e1d5;
+  --globe-background: #e6eaec;
+
+  /* pin colors (based on the eonet category ids) */
+  --pin-wildfires: #f4a582;
+  --pin-severeStorms: #9cc8e0;
+  --pin-volcanoes: #e8a3b5;
+  --pin-seaLakeIce: #c8e6ea;
+  --pin-floods: #a9b9e6;
+  --pin-earthquakes: #cdb59c;
+  --pin-drought: #f2d68f;
+  --pin-dustHaze: #dcd2c4;
+  --pin-landslides: #bfa792;
+  --pin-snow: #ffffff;
+  --pin-tempExtremes: #ef9f9f;
+  --pin-waterColor: #a0d6c8;
+  --pin-manmade: #c9c9c9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* base font and colors */
+body {
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  line-height: 1.5;
+  background: var(--background);
+  color: var(--text);
+}
+
+/* centered column */
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+/* header */
+header {
+  margin-bottom: 20px;
+}
+
+/* large centered title */
+header h1 {
+  margin: 0 0 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* summary on left and search on right */
+.header-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+/* summary line under the title */
+header p {
+  margin: 0;
+  color: var(--light-text);
+}
+
+/* date search */
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+/* from and to labels --> above date boxes */
+.search label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--light-text);
+}
+
+/* date boxes */
+.search input {
+  font: inherit;
+  color: var(--text);
+  background: #fffdf9;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 5px 10px;
+  color-scheme: light;
+}
+
+/* shared button styles */
+.search button {
+  font: inherit;
+  border-radius: 3px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+/* dark search button */
+#search-button {
+  background: var(--text);
+  color: var(--background);
+  border: 1px solid var(--text);
+}
+
+/* faded while search is loading */
+#search-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--light-text);
+  text-decoration: underline;
+}
+
+.link-button:hover {
+  color: var(--text);
+}
+
+/* category filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 20px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 5px 0;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--light-text);
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  color: var(--text);
+}
+
+/* current tab has darker text and  underline */
+.filter-button.active {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+/* number next to each tab name */
+.count {
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+/* globe and sidebar */
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* box that the globe is contained in */
+#globe {
+  /* stop canvas from stretching grid column */
+  min-width: 0;
+  height: 600px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--globe-background);
+  cursor: grab;
+}
+#globe canvas {
+  display: block;
+}
+
+/* details on top and list for rest */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
+/* selected event details */
+.details {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.details h2 {
+  margin: 0 0 10px;
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+/* labels on the left and values on the right */
+.details dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px 10px;
+  margin: 0 0 10px;
+}
+
+.details dt {
+  color: var(--light-text);
+}
+
+.details dd {
+  margin: 0;
+}
+
+/* message shown before anything is picked */
+.placeholder {
+  margin: 0;
+  color: var(--light-text);
+}
+
+/* scrolling list of events */
+.event-list {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+/* one row per event */
+.event-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 5px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.event-item:hover {
+  background: var(--hover);
+}
+
+/* row for the picked event */
+.event-item.selected {
+  background: var(--selected);
+}
+
+/* category and date under title */
+.event-item small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+.empty {
+  padding: 10px 5px;
+  font-size: 0.9rem;
+  color: var(--light-text);
+}
+
+.event-item .dot {
+  margin-top: 5px;
+}
+
+/* small colored circle with outline */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* red error text */
+.error {
+  color: #b5524b;
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+/* tablet and mobile */
+@media (max-width: 900px) {
+  /* less padding on small screens */
+  .wrapper {
+    padding: 20px 15px;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  /* stack sidebar under the globe */
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  #globe {
+    height: 400px;
+  }
+
+  .sidebar {
+    height: auto;
+  }
+
+  .event-list {
+    max-height: 400px;
+  }
+}

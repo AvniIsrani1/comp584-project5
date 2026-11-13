@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NASA Events</title>
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- load three from cdn as a module -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- centered column for the whole page -->
+    <div class="wrapper">
+      <header>
+        <h1>Natural Events on Earth</h1>
+
+        <!-- summary on the left and search on the right -->
+        <div class="header-row">
+          <!-- event count gets filled in via js -->
+          <p id="summary">Loading events...</p>
+
+          <!-- date range search -->
+          <form id="search" class="search">
+            <label>From <input type="date" id="start" required /></label>
+            <label>To <input type="date" id="end" required /></label>
+            <button type="submit" id="search-button">Search</button>
+            <!-- visible after a search only -->
+            <button type="button" id="back-button" class="link-button" hidden>Back to latest</button>
+          </form>
+        </div>
+      </header>
+
+      <!-- category tabs are added via js -->
+      <nav id="filters" class="filters"></nav>
+
+      <main class="layout">
+        <!-- 3d globe canvas -->
+        <div id="globe"></div>
+
+        <aside class="sidebar">
+          <!-- details for picked event -->
+          <div id="details" class="details">
+            <p class="placeholder">Click an event in the list to see more details!</p>
+          </div>
+
+          <!-- list of events (via js) -->
+          <ul id="event-list" class="event-list"></ul>
+        </aside>
+      </main>
+
+      <footer>Data from NASA's Earth Observatory Natural Event Tracker (EONET)</footer>
+    </div>
+
+    <!-- main script -->
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
